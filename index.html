@@ -538,6 +538,30 @@
       display: block;
       border: none;
     }
+    .map-visual {
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FDF6E9, #F5E8C0);
+      border-bottom: 1px solid var(--border);
+      gap: 0.8rem;
+    }
+    .map-pin { font-size: 3rem; }
+    .map-addr-big {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .map-addr-sub {
+      font-size: 0.82rem;
+      color: var(--amber);
+      letter-spacing: 0.1em;
+    }
     .map-btns {
       display: flex;
       border-top: 1px solid var(--border);
@@ -878,17 +902,16 @@
         </div>
 
         <div class="map-wrap reveal">
-          <iframe
-            src="https://map.kakao.com/link/map/할매방앗간,35.338093,129.222636/embed"
-            allowfullscreen
-            loading="lazy"
-            title="할매방앗간 위치">
-          </iframe>
+          <div class="map-visual">
+            <div class="map-pin">📍</div>
+            <div class="map-addr-big">부산시 기장군 장안읍<br>좌천로 22</div>
+            <div class="map-addr-sub">할매방앗간</div>
+          </div>
           <div class="map-btns">
-            <a href="https://map.kakao.com/link/map/할매방앗간,35.338093,129.222636" target="_blank" class="map-btn kakao-btn">
+            <a href="https://map.kakao.com/link/search/부산시 기장군 장안읍 좌천로 22" target="_blank" class="map-btn kakao-btn">
               🗺️ 카카오맵으로 보기
             </a>
-            <a href="https://naver.me/xQZ7Z7Z7" target="_blank" class="map-btn naver-btn">
+            <a href="https://map.naver.com/p/search/부산시 기장군 장안읍 좌천로 22" target="_blank" class="map-btn naver-btn">
               🗺️ 네이버 지도로 보기
             </a>
           </div>
