@@ -902,7 +902,16 @@
         </div>
 
         <div class="map-wrap reveal">
-          <div id="kakaomap" style="width:100%;height:360px;"></div>
+          <div id="daumRoughmapContainer1775030043331" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+          <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+          <script charset="UTF-8">
+            new daum.roughmap.Lander({
+              "timestamp": "1775030043331",
+              "key": "kc9vkjb3gcm",
+              "mapWidth": "640",
+              "mapHeight": "360"
+            }).render();
+          </script>
           <div class="map-btns">
             <a href="https://place.map.kakao.com/23878620" target="_blank" class="map-btn kakao-btn">
               🗺️ 카카오맵으로 보기
@@ -932,7 +941,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 스크롤 reveal
       const reveals = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
@@ -943,28 +951,8 @@
         });
       }, { threshold: 0.12 });
       reveals.forEach(el => observer.observe(el));
-
-      // 카카오맵
-      if (typeof kakao !== 'undefined') {
-        kakao.maps.load(function() {
-          var container = document.getElementById('kakaomap');
-          // 부산 기장군 장안읍 좌천로 22 (좌천리 123-3) 정확한 좌표
-          var coords = new kakao.maps.LatLng(35.24474, 129.21739);
-          var map = new kakao.maps.Map(container, {
-            center: coords,
-            level: 3
-          });
-          var marker = new kakao.maps.Marker({ position: coords });
-          marker.setMap(map);
-          var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
-          });
-          infowindow.open(map, marker);
-        });
-      }
     });
   </script>
-  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9&autoload=false"></script>
 
 </body>
 </html>
