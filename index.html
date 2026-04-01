@@ -66,6 +66,16 @@
       color: var(--dark-amber);
       letter-spacing: 0.02em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--border);
     }
     .nav-links {
       display: flex;
@@ -317,20 +327,20 @@
       box-shadow: 0 20px 40px rgba(30,18,8,0.1);
     }
     .product-img {
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      position: relative;
+      height: 220px;
       overflow: hidden;
+      position: relative;
+      background: var(--warm-white);
     }
-    .product-img.sesame { background: linear-gradient(135deg, #FFF8E8, #F5E8C0); }
-    .product-img.perilla { background: linear-gradient(135deg, #EFF8EE, #D4EDD2); }
-    .product-img.pepper { background: linear-gradient(135deg, #FFF0EE, #F5C8C0); }
-    .product-img.sesamesalt { background: linear-gradient(135deg, #FAFAFA, #E8E0D0); }
-    .product-img.grain { background: linear-gradient(135deg, #FFF8E0, #EDE0B8); }
-    .product-img.etc { background: linear-gradient(135deg, #F0EEF8, #D8D0E8); }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
 
     .product-badge {
       position: absolute;
@@ -664,7 +674,10 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">할매방앗간</a>
+    <a href="#hero" class="nav-logo">
+      <img src="images/아이콘.jpg" alt="할매방앗간" class="nav-icon">
+      할매방앗간
+    </a>
     <ul class="nav-links">
       <li><a href="#products">제품 소개</a></li>
       <li><a href="#process">제조 과정</a></li>
@@ -722,8 +735,8 @@
 
       <div class="products-grid">
         <div class="product-card reveal">
-          <div class="product-img sesame">
-            🫙
+          <div class="product-img">
+            <img src="images/참기름.jpg" alt="참기름">
             <span class="product-badge">BEST</span>
           </div>
           <div class="product-body">
@@ -733,7 +746,9 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img perilla">🫙</div>
+          <div class="product-img">
+            <img src="images/들기름.jpg" alt="들기름">
+          </div>
           <div class="product-body">
             <div class="product-name">들기름</div>
             <p class="product-desc">국산(및 외산) 들깨로 짠 신선한 들기름. 고소한 향이 살아있고 오메가3가 풍부합니다.</p>
@@ -741,7 +756,8 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img pepper">🌶️
+          <div class="product-img">
+            <img src="images/고춧가루.jpg" alt="고춧가루">
             <span class="product-badge">인기</span>
           </div>
           <div class="product-body">
@@ -751,7 +767,9 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img sesamesalt">🧂</div>
+          <div class="product-img">
+            <img src="images/깨소금.jpg" alt="깨소금">
+          </div>
           <div class="product-body">
             <div class="product-name">깨소금 · 볶음깨</div>
             <p class="product-desc">직접 볶아 만든 깨소금과 볶음깨. 고소함이 살아있어 나물, 반찬에 제격입니다.</p>
@@ -759,7 +777,9 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img grain">🌾</div>
+          <div class="product-img">
+            <img src="images/미숫가루.jpg" alt="미숫가루">
+          </div>
           <div class="product-body">
             <div class="product-name">미숫가루 · 쌀가루</div>
             <p class="product-desc">건강한 잡곡을 볶아 만든 미숫가루와 각종 쌀가루. 원하시는 재료로 맞춤 제조해드립니다.</p>
@@ -767,7 +787,9 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img etc">⚙️</div>
+          <div class="product-img">
+            <img src="images/방아서비스.jpg" alt="방아서비스">
+          </div>
           <div class="product-body">
             <div class="product-name">방아 서비스</div>
             <p class="product-desc">고객님이 가져오신 재료를 직접 빻아드리는 서비스. 고추, 깨 등 원하시는 재료를 가져오세요.</p>
