@@ -534,10 +534,37 @@
     }
     .map-wrap iframe {
       width: 100%;
-      height: 400px;
+      height: 360px;
       display: block;
       border: none;
     }
+    .map-btns {
+      display: flex;
+      border-top: 1px solid var(--border);
+    }
+    .map-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.9rem 1rem;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .kakao-btn {
+      background: #FEE500;
+      color: #3C1E1E;
+      border-right: 1px solid var(--border);
+    }
+    .kakao-btn:hover { background: #F0D800; }
+    .naver-btn {
+      background: #03C75A;
+      color: #fff;
+    }
+    .naver-btn:hover { background: #02B050; }
 
     /* ── FOOTER ── */
     footer {
@@ -852,11 +879,19 @@
 
         <div class="map-wrap reveal">
           <iframe
-            src="https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%EC%8B%9C%20%EA%B8%B0%EC%9E%A5%EA%B5%B0%20%EC%9E%A5%EC%95%88%EC%9D%8D%20%EC%A2%8C%EC%B2%9C%EB%A1%9C%2022/address/14253090.28885937,4101484.9543218,%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B8%B0%EC%9E%A5%EA%B5%B0%20%EC%9E%A5%EC%95%88%EC%9D%8D%20%EC%A2%8C%EC%B2%9C%EB%A1%9C%2022,new?c=15,0,0,0,dh"
+            src="https://map.kakao.com/link/map/할매방앗간,35.338093,129.222636/embed"
             allowfullscreen
             loading="lazy"
             title="할매방앗간 위치">
           </iframe>
+          <div class="map-btns">
+            <a href="https://map.kakao.com/link/map/할매방앗간,35.338093,129.222636" target="_blank" class="map-btn kakao-btn">
+              🗺️ 카카오맵으로 보기
+            </a>
+            <a href="https://naver.me/xQZ7Z7Z7" target="_blank" class="map-btn naver-btn">
+              🗺️ 네이버 지도로 보기
+            </a>
+          </div>
         </div>
       </div>
     </div>
