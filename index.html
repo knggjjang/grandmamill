@@ -902,13 +902,9 @@
         </div>
 
         <div class="map-wrap reveal">
-          <div class="map-visual">
-            <div class="map-pin">📍</div>
-            <div class="map-addr-big">부산시 기장군 장안읍<br>좌천로 22</div>
-            <div class="map-addr-sub">할매방앗간</div>
-          </div>
+          <div id="kakaomap" style="width:100%;height:360px;"></div>
           <div class="map-btns">
-            <a href="https://map.kakao.com/link/search/부산시 기장군 장안읍 좌천로 22" target="_blank" class="map-btn kakao-btn">
+            <a href="https://map.kakao.com/link/map/할매방앗간,35.3947,129.2197" target="_blank" class="map-btn kakao-btn">
               🗺️ 카카오맵으로 보기
             </a>
             <a href="https://map.naver.com/p/search/부산시 기장군 장안읍 좌천로 22" target="_blank" class="map-btn naver-btn">
@@ -934,8 +930,28 @@
     </div>
   </footer>
 
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9"></script>
   <script>
-    // Scroll reveal
+    // 카카오맵 초기화
+    var container = document.getElementById('kakaomap');
+    var options = {
+      center: new kakao.maps.LatLng(35.3947, 129.2197),
+      level: 4
+    };
+    var map = new kakao.maps.Map(container, options);
+
+    // 마커 표시
+    var markerPosition = new kakao.maps.LatLng(35.3947, 129.2197);
+    var marker = new kakao.maps.Marker({ position: markerPosition });
+    marker.setMap(map);
+
+    // 인포윈도우 (말풍선)
+    var infowindow = new kakao.maps.InfoWindow({
+      content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 스크롤 reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
