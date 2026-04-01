@@ -904,10 +904,10 @@
         <div class="map-wrap reveal">
           <div id="kakaomap" style="width:100%;height:360px;"></div>
           <div class="map-btns">
-            <a href="https://map.kakao.com/link/map/할매방앗간,35.3947,129.2197" target="_blank" class="map-btn kakao-btn">
+            <a href="https://place.map.kakao.com/23878620" target="_blank" class="map-btn kakao-btn">
               🗺️ 카카오맵으로 보기
             </a>
-            <a href="https://map.naver.com/p/search/부산시 기장군 장안읍 좌천로 22" target="_blank" class="map-btn naver-btn">
+            <a href="https://map.naver.com/p/search/부산 기장군 장안읍 좌천로 22" target="_blank" class="map-btn naver-btn">
               🗺️ 네이버 지도로 보기
             </a>
           </div>
@@ -930,26 +930,32 @@
     </div>
   </footer>
 
-  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9"></script>
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9&libraries=services"></script>
   <script>
-    // 카카오맵 초기화
+    // 카카오맵 - 장소 ID로 정확한 위치 표시
     var container = document.getElementById('kakaomap');
     var options = {
-      center: new kakao.maps.LatLng(35.3947, 129.2197),
+      center: new kakao.maps.LatLng(35.2456, 129.2197),
       level: 4
     };
     var map = new kakao.maps.Map(container, options);
 
-    // 마커 표시
-    var markerPosition = new kakao.maps.LatLng(35.3947, 129.2197);
-    var marker = new kakao.maps.Marker({ position: markerPosition });
-    marker.setMap(map);
+    // 장소 ID로 정확한 좌표 검색
+    var places = new kakao.maps.services.Places();
+    places.getDetails({placeId: '23878620'}, function(result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        map.setCenter(coords);
 
-    // 인포윈도우 (말풍선)
-    var infowindow = new kakao.maps.InfoWindow({
-      content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
+        var marker = new kakao.maps.Marker({ position: coords });
+        marker.setMap(map);
+
+        var infowindow = new kakao.maps.InfoWindow({
+          content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
+        });
+        infowindow.open(map, marker);
+      }
     });
-    infowindow.open(map, marker);
 
     // 스크롤 reveal
     const reveals = document.querySelectorAll('.reveal');
