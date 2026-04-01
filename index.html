@@ -170,10 +170,9 @@
     }
     .btn-secondary:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
 
-    /* 히어로 섹션 우측 이미지 처리 업그레이드 */
     .hero-right {
       position: relative;
-      background: url('https://images.unsplash.com/photo-1620023472099-63ff0052a5c5?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+      background: var(--dark);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -183,8 +182,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(30, 18, 8, 0.65); /* 사진을 약간 어둡게 눌러주어 텍스트와 엠블럼을 강조 */
-      z-index: 1;
+      background: radial-gradient(ellipse at 30% 60%, rgba(200,134,26,0.25) 0%, transparent 65%);
     }
     .hero-emblem {
       position: relative;
@@ -196,41 +194,55 @@
       width: 280px;
       height: 280px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 204, 102, 0.4); /* 기존 톤 유지하면서 조금 더 밝게 조정 */
+      border: 2px solid rgba(200,134,26,0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
       margin: 0 auto;
-      background: rgba(30, 18, 8, 0.3); /* 반투명 배경 추가 */
-      backdrop-filter: blur(4px);
     }
     .hero-emblem-circle::before {
       content: '';
       position: absolute;
       inset: 12px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 204, 102, 0.2);
+      border: 1px solid rgba(200,134,26,0.2);
     }
     .emblem-kr {
       font-family: 'Nanum Myeongjo', serif;
       font-size: 2.8rem;
       font-weight: 800;
-      color: #FFDF8D; /* 어두운 배경에서 더 잘 보이도록 밝은 앰버 계열 사용 */
+      color: var(--amber);
       line-height: 1.2;
     }
     .emblem-sub {
       font-size: 0.7rem;
       letter-spacing: 0.2em;
-      color: rgba(255, 223, 141, 0.8);
+      color: rgba(200,134,26,0.7);
       margin-top: 0.3rem;
     }
     .emblem-year {
       font-size: 0.65rem;
       letter-spacing: 0.25em;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.3);
       margin-top: 1.2rem;
+    }
+
+    /* sesame icon decoration */
+    .sesame-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .sesame-dots span {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(200,134,26,0.3);
+      animation: float 4s ease-in-out infinite;
     }
 
     /* ── FEATURES STRIP ── */
@@ -297,30 +309,28 @@
       border: 1px solid var(--border);
       border-radius: 4px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s, box-shadow 0.25s;
       cursor: default;
     }
     .product-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 40px rgba(30,18,8,0.1);
     }
-    
-    /* 실제 이미지 렌더링을 위한 업그레이드 영역 */
     .product-img {
-      height: 240px; /* 사진을 담기 위해 조금 높이를 키움 */
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
       position: relative;
       overflow: hidden;
-      background: #EAE3D5; /* 이미지 로딩 전 플레이스홀더 색상 */
     }
-    .product-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* 이미지가 찌그러지지 않고 영역에 꽉 차게 */
-      transition: transform 0.6s ease;
-    }
-    .product-card:hover .product-img img {
-      transform: scale(1.08); /* 호버 시 이미지가 부드럽게 줌인 됨 */
-    }
+    .product-img.sesame { background: linear-gradient(135deg, #FFF8E8, #F5E8C0); }
+    .product-img.perilla { background: linear-gradient(135deg, #EFF8EE, #D4EDD2); }
+    .product-img.pepper { background: linear-gradient(135deg, #FFF0EE, #F5C8C0); }
+    .product-img.sesamesalt { background: linear-gradient(135deg, #FAFAFA, #E8E0D0); }
+    .product-img.grain { background: linear-gradient(135deg, #FFF8E0, #EDE0B8); }
+    .product-img.etc { background: linear-gradient(135deg, #F0EEF8, #D8D0E8); }
 
     .product-badge {
       position: absolute;
@@ -331,7 +341,6 @@
       letter-spacing: 0.1em;
       padding: 0.25rem 0.6rem;
       border-radius: 2px;
-      z-index: 2;
     }
     .product-body { padding: 1.5rem; }
     .product-name {
@@ -495,6 +504,7 @@
       margin-top: 4rem;
       align-items: start;
     }
+    .location-details { }
     .location-item {
       display: flex;
       gap: 1rem;
@@ -527,6 +537,30 @@
       height: 360px;
       display: block;
       border: none;
+    }
+    .map-visual {
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FDF6E9, #F5E8C0);
+      border-bottom: 1px solid var(--border);
+      gap: 0.8rem;
+    }
+    .map-pin { font-size: 3rem; }
+    .map-addr-big {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .map-addr-sub {
+      font-size: 0.82rem;
+      color: var(--amber);
+      letter-spacing: 0.1em;
     }
     .map-btns {
       display: flex;
@@ -589,6 +623,14 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); opacity: 0.3; }
+      50%       { transform: translateY(-12px); opacity: 0.7; }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
 
     .reveal {
       opacity: 0;
@@ -620,6 +662,7 @@
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-logo">할매방앗간</a>
     <ul class="nav-links">
@@ -631,6 +674,7 @@
     <a href="tel:051-727-0034" class="nav-call">📞 051-727-0034</a>
   </nav>
 
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-left">
       <span class="hero-tag">부산 기장 · 전통 방앗간</span>
@@ -660,6 +704,7 @@
     </div>
   </section>
 
+  <!-- FEATURES STRIP -->
   <div class="features-strip">
     <div class="feature-item"><span class="feature-icon">🌾</span> 100% 국산(및 외산) 원재료 사용</div>
     <div class="feature-item"><span class="feature-icon">🏭</span> 당일 직접 제조·판매</div>
@@ -667,6 +712,7 @@
     <div class="feature-item"><span class="feature-icon">📞</span> 전화 주문 가능</div>
   </div>
 
+  <!-- PRODUCTS -->
   <section id="products">
     <div class="container">
       <p class="section-label reveal">우리 제품</p>
@@ -676,8 +722,8 @@
 
       <div class="products-grid">
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1596647281084-5f50b28ec604?auto=format&fit=crop&q=80&w=800" alt="참기름">
+          <div class="product-img sesame">
+            🫙
             <span class="product-badge">BEST</span>
           </div>
           <div class="product-body">
@@ -687,9 +733,7 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1620023472099-63ff0052a5c5?auto=format&fit=crop&q=80&w=800" alt="들기름">
-          </div>
+          <div class="product-img perilla">🫙</div>
           <div class="product-body">
             <div class="product-name">들기름</div>
             <p class="product-desc">국산(및 외산) 들깨로 짠 신선한 들기름. 고소한 향이 살아있고 오메가3가 풍부합니다.</p>
@@ -697,8 +741,7 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?auto=format&fit=crop&q=80&w=800" alt="고춧가루">
+          <div class="product-img pepper">🌶️
             <span class="product-badge">인기</span>
           </div>
           <div class="product-body">
@@ -708,9 +751,7 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1529126235883-e18e87d8bc2d?auto=format&fit=crop&q=80&w=800" alt="깨소금">
-          </div>
+          <div class="product-img sesamesalt">🧂</div>
           <div class="product-body">
             <div class="product-name">깨소금 · 볶음깨</div>
             <p class="product-desc">직접 볶아 만든 깨소금과 볶음깨. 고소함이 살아있어 나물, 반찬에 제격입니다.</p>
@@ -718,9 +759,7 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1509486252973-207908b894dc?auto=format&fit=crop&q=80&w=800" alt="미숫가루">
-          </div>
+          <div class="product-img grain">🌾</div>
           <div class="product-body">
             <div class="product-name">미숫가루 · 쌀가루</div>
             <p class="product-desc">건강한 잡곡을 볶아 만든 미숫가루와 각종 쌀가루. 원하시는 재료로 맞춤 제조해드립니다.</p>
@@ -728,9 +767,7 @@
         </div>
 
         <div class="product-card reveal">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1574323218768-450ebecb720b?auto=format&fit=crop&q=80&w=800" alt="방아 서비스">
-          </div>
+          <div class="product-img etc">⚙️</div>
           <div class="product-body">
             <div class="product-name">방아 서비스</div>
             <p class="product-desc">고객님이 가져오신 재료를 직접 빻아드리는 서비스. 고추, 깨 등 원하시는 재료를 가져오세요.</p>
@@ -740,6 +777,7 @@
     </div>
   </section>
 
+  <!-- PROCESS -->
   <section id="process">
     <div class="container">
       <p class="section-label reveal">제조 과정</p>
@@ -771,6 +809,7 @@
     </div>
   </section>
 
+  <!-- ORDER -->
   <section id="order">
     <div class="container">
       <p class="section-label reveal">주문 · 문의</p>
@@ -819,6 +858,7 @@
     </div>
   </section>
 
+  <!-- LOCATION -->
   <section id="location">
     <div class="container">
       <p class="section-label reveal">찾아오는 길</p>
@@ -885,6 +925,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-logo">할매방앗간</div>
