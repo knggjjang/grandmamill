@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>할매방앗간 | 부산 기장 전통 참기름·고춧가루</title>
+  <meta name="description" content="부산 기장 할매방앗간 - 국산 참기름, 들기름, 고춧가루, 깨소금, 미숫가루를 직접 짜고 빻아 판매합니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FDF6E9;
+      --warm-white: #FAF3E0;
+      --amber: #C8861A;
+      --dark-amber: #8B5E0A;
+      --red: #B83232;
+      --dark: #1E1208;
+      --mid: #5C3D1E;
+      --light-mid: #8B6A3E;
+      --border: #D4B483;
+      --grain-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: var(--grain-url);
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(253, 246, 233, 0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--dark-amber);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+
+    .nav-call {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--amber);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .nav-call:hover { background: var(--dark-amber); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 6rem;
+      position: relative;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      width: fit-content;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-title span { color: var(--amber); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--light-mid);
+      line-height: 1.9;
+      max-width: 420px;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--dark-amber); transform: translateY(-2px); }
+    .btn-secondary {
+      border: 1.5px solid var(--border);
+      color: var(--mid);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+
+    .hero-right {
+      position: relative;
+      background: var(--dark);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(200,134,26,0.25) 0%, transparent 65%);
+    }
+    .hero-emblem {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeIn 1.2s 0.4s ease both;
+    }
+    .hero-emblem-circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 2px solid rgba(200,134,26,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 0 auto;
+    }
+    .hero-emblem-circle::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,134,26,0.2);
+    }
+    .emblem-kr {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--amber);
+      line-height: 1.2;
+    }
+    .emblem-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: rgba(200,134,26,0.7);
+      margin-top: 0.3rem;
+    }
+    .emblem-year {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.3);
+      margin-top: 1.2rem;
+    }
+
+    /* sesame icon decoration */
+    .sesame-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .sesame-dots span {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(200,134,26,0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* ── FEATURES STRIP ── */
+    .features-strip {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow: hidden;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.4rem 3rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+    }
+    .feature-item:last-child { border-right: none; }
+    .feature-icon { font-size: 1.3rem; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 7rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+    .section-desc {
+      color: var(--light-mid);
+      max-width: 520px;
+      line-height: 1.9;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--amber);
+      margin: 1.5rem 0;
+    }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--warm-white); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .product-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(30,18,8,0.1);
+    }
+    .product-img {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img.sesame { background: linear-gradient(135deg, #FFF8E8, #F5E8C0); }
+    .product-img.perilla { background: linear-gradient(135deg, #EFF8EE, #D4EDD2); }
+    .product-img.pepper { background: linear-gradient(135deg, #FFF0EE, #F5C8C0); }
+    .product-img.sesamesalt { background: linear-gradient(135deg, #FAFAFA, #E8E0D0); }
+    .product-img.grain { background: linear-gradient(135deg, #FFF8E0, #EDE0B8); }
+    .product-img.etc { background: linear-gradient(135deg, #F0EEF8, #D8D0E8); }
+
+    .product-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--amber);
+      color: #fff;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .product-body { padding: 1.5rem; }
+    .product-name {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--light-mid);
+      line-height: 1.7;
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--cream); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .step-num {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--amber);
+      margin: 0 auto 1.5rem;
+    }
+    .step-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--light-mid);
+      line-height: 1.7;
+    }
+
+    /* ── ORDER ── */
+    #order {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    #order::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,134,26,0.12) 0%, transparent 60%);
+    }
+    #order .container { position: relative; z-index: 1; }
+    #order .section-title { color: var(--cream); }
+    #order .section-desc { color: rgba(253,246,233,0.55); }
+    #order .divider { background: var(--amber); }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      align-items: center;
+    }
+    .order-info-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .order-info-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.9rem;
+    }
+    .order-info-list li:last-child { border-bottom: none; }
+    .info-label {
+      color: var(--amber);
+      font-weight: 500;
+      min-width: 80px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+    .info-val { color: rgba(253,246,233,0.8); }
+
+    .order-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,134,26,0.25);
+      border-radius: 4px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .order-card-icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
+    .order-card-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .order-card-desc {
+      font-size: 0.85rem;
+      color: rgba(253,246,233,0.5);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--amber);
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-call:hover { background: var(--dark-amber); transform: translateY(-2px); }
+    .btn-call-num {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── MAP ── */
+    #location { background: var(--warm-white); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+    .location-details { }
+    .location-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .loc-icon {
+      font-size: 1.3rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+    .loc-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+    }
+    .loc-val {
+      font-size: 0.92rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    .map-wrap {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(30,18,8,0.08);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 400px;
+      display: block;
+      border: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.3);
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.4rem;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+    }
+    .footer-info {
+      font-size: 0.78rem;
+      line-height: 2;
+    }
+    .footer-copy {
+      margin-top: 1.5rem;
+      font-size: 0.72rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); opacity: 0.3; }
+      50%       { transform: translateY(-12px); opacity: 0.7; }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 1.5rem 3rem; }
+      .hero-right { display: none; }
+      .features-strip { flex-direction: column; }
+      .feature-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 1rem 2rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .order-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .location-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">할매방앗간</a>
+    <ul class="nav-links">
+      <li><a href="#products">제품 소개</a></li>
+      <li><a href="#process">제조 과정</a></li>
+      <li><a href="#order">주문하기</a></li>
+      <li><a href="#location">찾아오는 길</a></li>
+    </ul>
+    <a href="tel:051-727-0034" class="nav-call">📞 051-727-0034</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <span class="hero-tag">부산 기장 · 전통 방앗간</span>
+      <h1 class="hero-title">
+        정직하게<br>
+        <span>직접 짜고</span><br>
+        빻습니다
+      </h1>
+      <p class="hero-sub">
+        할매방앗간은 국산 원재료만을 사용하여<br>
+        참기름·들기름·고춧가루를 직접 짜고 빻아<br>
+        건강한 먹거리를 만들어 드립니다.
+      </p>
+      <div class="hero-btns">
+        <a href="#order" class="btn-primary">지금 주문하기</a>
+        <a href="#products" class="btn-secondary">제품 보러가기</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-emblem">
+        <div class="hero-emblem-circle">
+          <div class="emblem-kr">할매<br>방앗간</div>
+          <div class="emblem-sub">GRANDMA MILL</div>
+          <div class="emblem-year">BUSAN · GIJANG · EST.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES STRIP -->
+  <div class="features-strip">
+    <div class="feature-item"><span class="feature-icon">🌾</span> 100% 국산 원재료 사용</div>
+    <div class="feature-item"><span class="feature-icon">🏭</span> 당일 직접 제조·판매</div>
+    <div class="feature-item"><span class="feature-icon">📦</span> 전국 택배 배송 가능</div>
+    <div class="feature-item"><span class="feature-icon">📞</span> 전화 주문 가능</div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <p class="section-label reveal">우리 제품</p>
+      <h2 class="section-title reveal">국산 원재료로 만든<br>건강한 먹거리</h2>
+      <div class="divider reveal"></div>
+      <p class="section-desc reveal">참깨, 들깨, 고추 등 엄선한 국산 재료를 사용합니다.<br>방문하시면 직접 짜는 과정을 눈으로 확인하실 수 있습니다.</p>
+
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <div class="product-img sesame">
+            🫙
+            <span class="product-badge">BEST</span>
+          </div>
+          <div class="product-body">
+            <div class="product-name">참기름</div>
+            <p class="product-desc">국산 참깨를 저온 압착 방식으로 직접 짜낸 고소하고 진한 참기름입니다. 방부제·첨가물 없이 순수하게 제조합니다.</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-img perilla">🫙</div>
+          <div class="product-body">
+            <div class="product-name">들기름</div>
+            <p class="product-desc">국산 들깨로 짠 신선한 들기름. 고소한 향이 살아있고 오메가3가 풍부합니다.</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-img pepper">🌶️
+            <span class="product-badge">인기</span>
+          </div>
+          <div class="product-body">
+            <div class="product-name">고춧가루</div>
+            <p class="product-desc">국산 건고추를 직접 빻아 만든 고춧가루. 김장용·요리용으로 굵기 조절이 가능합니다.</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-img sesamesalt">🧂</div>
+          <div class="product-body">
+            <div class="product-name">깨소금 · 볶음깨</div>
+            <p class="product-desc">직접 볶아 만든 깨소금과 볶음깨. 고소함이 살아있어 나물, 반찬에 제격입니다.</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-img grain">🌾</div>
+          <div class="product-body">
+            <div class="product-name">미숫가루 · 쌀가루</div>
+            <p class="product-desc">건강한 잡곡을 볶아 만든 미숫가루와 각종 쌀가루. 원하시는 재료로 맞춤 제조해드립니다.</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-img etc">⚙️</div>
+          <div class="product-body">
+            <div class="product-name">방아 서비스</div>
+            <p class="product-desc">고객님이 가져오신 재료를 직접 빻아드리는 서비스. 고추, 깨 등 원하시는 재료를 가져오세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <p class="section-label reveal">제조 과정</p>
+      <h2 class="section-title reveal">원재료 선별부터<br>포장까지 직접 합니다</h2>
+      <div class="divider reveal"></div>
+
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">一</div>
+          <div class="step-title">원재료 선별</div>
+          <p class="step-desc">국산 참깨·들깨·고추만을 엄선하여 사용합니다</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">二</div>
+          <div class="step-title">세척 · 건조</div>
+          <p class="step-desc">이물질 제거 후 깨끗이 세척하고 충분히 건조합니다</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">三</div>
+          <div class="step-title">압착 · 분쇄</div>
+          <p class="step-desc">저온 압착으로 기름을 짜고 직접 빻아 만듭니다</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="step-num">四</div>
+          <div class="step-title">포장 · 판매</div>
+          <p class="step-desc">당일 제조한 신선한 제품을 바로 포장해 드립니다</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section id="order">
+    <div class="container">
+      <p class="section-label reveal">주문 · 문의</p>
+      <h2 class="section-title reveal">전화 한 통으로<br>간편하게 주문하세요</h2>
+      <div class="divider reveal"></div>
+      <p class="section-desc reveal">방문 구매, 전화 주문, 택배 배송 모두 가능합니다.<br>원하시는 제품과 수량을 말씀해 주세요.</p>
+
+      <div class="order-grid">
+        <div>
+          <ul class="order-info-list">
+            <li>
+              <span class="info-label">전화</span>
+              <span class="info-val">051-727-0034</span>
+            </li>
+            <li>
+              <span class="info-label">평일</span>
+              <span class="info-val">오전 09:00 ~ 오후 18:00</span>
+            </li>
+            <li>
+              <span class="info-label">토요일</span>
+              <span class="info-val">오전 09:00 ~ 오후 13:00</span>
+            </li>
+            <li>
+              <span class="info-label">일요일</span>
+              <span class="info-val">휴무</span>
+            </li>
+            <li>
+              <span class="info-label">배송</span>
+              <span class="info-val">전국 택배 배송 가능<br><small style="opacity:0.6">(배송비 별도 문의)</small></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="order-card reveal">
+          <div class="order-card-icon">📞</div>
+          <div class="order-card-title">전화로 주문하기</div>
+          <p class="order-card-desc">
+            원하시는 제품명과 수량을 말씀해 주시면<br>
+            친절하게 안내해 드립니다.
+          </p>
+          <a href="tel:051-727-0034" class="btn-call">
+            <span class="btn-call-num">051-727-0034</span>로 전화하기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="container">
+      <p class="section-label reveal">찾아오는 길</p>
+      <h2 class="section-title reveal">부산 기장에서<br>만나실 수 있습니다</h2>
+      <div class="divider reveal"></div>
+
+      <div class="location-grid">
+        <div class="location-details">
+          <div class="location-item reveal">
+            <span class="loc-icon">📍</span>
+            <div>
+              <div class="loc-label">주소</div>
+              <div class="loc-val">부산시 기장군 장안읍 좌천로 22</div>
+            </div>
+          </div>
+          <div class="location-item reveal">
+            <span class="loc-icon">📞</span>
+            <div>
+              <div class="loc-label">전화</div>
+              <div class="loc-val"><a href="tel:051-727-0034" style="color:inherit;text-decoration:none;">051-727-0034</a></div>
+            </div>
+          </div>
+          <div class="location-item reveal">
+            <span class="loc-icon">🕐</span>
+            <div>
+              <div class="loc-label">운영시간</div>
+              <div class="loc-val">
+                평일 09:00 ~ 18:00<br>
+                토요일 09:00 ~ 13:00<br>
+                일요일 휴무
+              </div>
+            </div>
+          </div>
+          <div class="location-item reveal">
+            <span class="loc-icon">🚗</span>
+            <div>
+              <div class="loc-label">주차</div>
+              <div class="loc-val">방앗간 앞 주차 가능</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-wrap reveal">
+          <iframe
+            src="https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%EC%8B%9C%20%EA%B8%B0%EC%9E%A5%EA%B5%B0%20%EC%9E%A5%EC%95%88%EC%9D%8D%20%EC%A2%8C%EC%B2%9C%EB%A1%9C%2022/address/14253090.28885937,4101484.9543218,%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B8%B0%EC%9E%A5%EA%B5%B0%20%EC%9E%A5%EC%95%88%EC%9D%8D%20%EC%A2%8C%EC%B2%9C%EB%A1%9C%2022,new?c=15,0,0,0,dh"
+            allowfullscreen
+            loading="lazy"
+            title="할매방앗간 위치">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">할매방앗간</div>
+      <div class="footer-info">
+        부산시 기장군 장안읍 좌천로 22 &nbsp;|&nbsp; 051-727-0034<br>
+        평일 09:00~18:00 &nbsp;·&nbsp; 토요일 09:00~13:00 &nbsp;·&nbsp; 일요일 휴무
+      </div>
+      <div class="footer-copy">
+        © 2025 할매방앗간 (Grandma Mill). All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
