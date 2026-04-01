@@ -931,47 +931,46 @@
   </footer>
 
   <script>
-    // 스크롤 reveal - 카카오맵과 독립적으로 실행
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
-  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9&libraries=services&autoload=false"></script>
-  <script>
-    // 카카오맵 - 별도로 안전하게 로딩
-    kakao.maps.load(function() {
-      var container = document.getElementById('kakaomap');
-      var options = {
-        center: new kakao.maps.LatLng(35.2456, 129.2197),
-        level: 4
-      };
-      var map = new kakao.maps.Map(container, options);
+    document.addEventListener('DOMContentLoaded', function() {
+      // 스크롤 reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach(el => observer.observe(el));
 
-      var places = new kakao.maps.services.Places();
-      places.getDetails({placeId: '23878620'}, function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-          map.setCenter(coords);
-          map.setLevel(3);
-
-          var marker = new kakao.maps.Marker({ position: coords });
-          marker.setMap(map);
-
-          var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
+      // 카카오맵
+      if (typeof kakao !== 'undefined') {
+        kakao.maps.load(function() {
+          var container = document.getElementById('kakaomap');
+          var map = new kakao.maps.Map(container, {
+            center: new kakao.maps.LatLng(35.2456, 129.2197),
+            level: 4
           });
-          infowindow.open(map, marker);
-        }
-      });
+          var places = new kakao.maps.services.Places();
+          places.getDetails({placeId: '23878620'}, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+              map.setCenter(coords);
+              map.setLevel(3);
+              var marker = new kakao.maps.Marker({ position: coords });
+              marker.setMap(map);
+              var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="padding:6px 10px;font-size:13px;font-weight:bold;color:#333;">할매방앗간</div>'
+              });
+              infowindow.open(map, marker);
+            }
+          });
+        });
+      }
     });
   </script>
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c874d01ee4b4e987a8af4e5e12dbafb9&libraries=services&autoload=false"></script>
 
 </body>
 </html>
